@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>zetbank</title>
+{% endblock %}
+{% block content %}
+    {% if message %}
+    <div class="success-message">
+        {{ message }}
+
+    </div>
+    {% endif %}
+
+   <center> <b><center>Application accepted</center></b><a href="{% url 'index' %}"><button type="submit">Home</button></a></center>
+
+    <!-- Your form and other HTML content here -->
+{% endblock %}

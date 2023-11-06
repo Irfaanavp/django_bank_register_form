@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Registration or Sign Up form in HTML CSS | CodingLab </title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+   </head>
+<body>
+  <div class="wrapper">
+    {% if error %}
+{{ error }}
+
+<br/>
+<br/>
+{% endif %}
+
+    <h2>Registration</h2>
+    <form action="register" method="post">
+      {% csrf_token %}
+      <div class="input-box">
+        <input type="text" placeholder="Enter your name" id="username" name="username">
+      </div>
+      <div class="input-box">
+        <input type="text" placeholder="Enter your email" id="email" name="email">
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Create password" id="password" name="password">
+      </div>
+      <div class="input-box">
+        <input type="password" placeholder="Confirm password" id="confirm" name="confirm">
+      </div>
+      <div class="policy">
+        <input type="checkbox">
+        <h3>I accept all terms & condition</h3>
+      </div>
+      <div class="input-box button">
+       <a href="{% url 'login' %}"> <input type="Submit" value="Register Now"></a>
+      </div>
+      <div class="text">
+        <h3>Already have an account? <a href="{% url 'login' %}">Login now</a></h3>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

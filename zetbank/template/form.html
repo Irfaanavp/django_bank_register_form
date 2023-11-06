@@ -1,0 +1,226 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Digital Form</title>
+   <link rel="stylesheet" href="{% static 'css/form.css' %}">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+    .form-control {
+   font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+
+<!--</style>-->
+<!--</head>-->
+
+  <body>
+  <div class="container">
+
+    <h1 class="main-header">Account Application Form.</h1>
+    <fieldset class="sub-container" id="basic-details">
+        <br><div class="wrapper">
+  {% if message %}
+    <div class="success-message">
+        {{ message }}
+    </div>
+    {% endif %}
+    <form id="app-form" action="{% url 'success' %}" method="post">
+        {% csrf_token %}
+      <h2 class="sub-heading">Basic Details</h2>
+      <hr>
+        <label for="dropdown" class="standard-label">
+          Title<span class="required">*</span>
+          <br>
+          <select  id="dropdown" class="standard-select" required>
+            <option value="select" disabled selected>Select Title</option>
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Miss">Miss</option>
+            <option value="Ms">Ms</option>
+            <option value="Dr">Dr</option>
+            <option value="Prof">Prof</option>
+          </select>
+        </label>
+
+        <label for="{{ form.name.id_for_label }}" class="standard-label">
+          User Name<span class="required">*</span>
+                {{ form.name }}
+          <input class="standard-input" name="username" id="username" type="text" placeholder="Username..." required>
+        </label>
+        <label for="phone-number" class="standard-label">
+          Phone Number<span class="required">*</span>
+            {{ form.phone_number }}
+            <input class="standard-input" name="phone-number" id="phoneno" type="text" placeholder="phone no.." required>
+        </label>
+        <label for="email-address" class="standard-label">
+          Email<span class="required">*</span>
+            {{ form.email }}
+           <input class="standard-input" name="email" id="email" type="text" placeholder="email..." required>
+        </label>
+        <label for="DOB" class="standard-label">
+          Date of Birth<span class="required">*</span>
+          <input class="standard-input" type="date" name="dob" id="DOB" required>
+        </label>
+       <label for="age" class="standard-label">
+          Age<span class="required">*</span>
+          <input class="standard-input" type="text" name="age" id="age" required>
+        </label>
+         <label for="gender" class="standard-label">
+          Gender<span class="required">*</span>
+          <input type="radio" name="gender" value="male"> Male <input type="radio" name="gender" value="female">
+             female
+        </label>
+<!--        <div id="current-address">-->
+<!--          <h3 class="small-heading">Current Address</h3>-->
+          <label for="line1" class="standard-label">
+            Address <span class="required">*</span>
+            <input class="standard-input" type="text" required>{{user.address}}
+          </label>
+<!--          <label for="line2" class="standard-label">-->
+<!--            Address line 2-->
+<!--            <input class="standard-input" type="text">-->
+<!--          </label>-->
+<!--          <label for="town-city" class="standard-label">-->
+<!--            District<span class="required">*</span>-->
+<!--            <input class="standard-input" type="text" required>{{user.district}}-->
+<!--          </label>-->
+          <label for="county" class="standard-label">
+            County
+            <input class="standard-input" type="text">
+          </label>
+        <label for="district" class="standard-label">District:</label>
+         <select id="district" name="district" class="standard-select" required>
+             <option value="">District</option>
+             <option value="Kasargod">Kasargod</option>
+             <option VALUE="Kannur">Kannur</option>
+             <option value="Wayanad">Wayanad</option>
+             <option value="Kozikkod">Kozikkod</option>
+             <option value="Malappuram">Malappuram</option>
+        <!-- Add options for districts here -->
+         </select>
+
+         <label for="branch">Branch:</label>
+            <select id="branch" name="branch" class="standard-select">
+                <option value="">Select a District first</option>
+                 <option value="Thalassery">Thalassery</option>
+                <option value="Panoor">Panoor</option>
+                <option value="Kasargod">Kasargod</option>
+                <option value="Uppala">Uppala</option>
+                <option value="Mananthavadi">Mananthavadi</option>
+                <option value="SulthanBathery">SulthanBathery</option>
+                <option value="Farook">Farook</option>
+                <option value="Kutyadi">Kutyadi</option>
+                <option value="Ponnani">Ponnani</option>
+                <option value="Kuttipuram">Kuttipuram</option>
+        <!-- This dropdown will be pop ulated dynamically -->
+            </select>
+
+
+  </div>
+
+
+        <label for="accounttype" class="standard-label">
+          What type of account are you applying for?<span class="required">*</span>
+          <br>
+          <select  id="account-select" class="standard-select" required>
+            <option value="select" disabled selected>Choose Account</option>
+            <option value="basic-current">Basic Current Account</option>
+            <option value="premium-current">Premium Current Account</option>
+            <option value="instant-saver">Savings Account</option>
+            <option value="lifetime-isa">NRE</option>
+            <option value="help-to-buy">NRO</option>
+          </select>P
+        </label>
+         <label class="" for="accounttype" class="">Material
+         <span class="required">*</span>
+          <br>
+        <input type="checkbox" name="checkbox" id="card" style="width:20px; height=20px; display:inline;"/>Debit card<br>
+        <input type="checkbox" name="checkbox" id="credit" style="width:20px; height=20px; display:inline;"/>Credit Card<br>
+        <input type="checkbox" name="checkbox" id="cheque" style="width:20px; height=20px; display:inline;"/>Cheque Book
+
+        </label><br>
+        <div>
+        <a href="{% url 'success' %}"><button type="submit">submit</button></a>
+        <br>
+        </div>
+    </form>
+        <a href="{% url 'index' %}"> <button type="submit" style="text-align:center">logout</button></a>
+<!--  </div>-->
+   <script src="{% static 'js/form.js' %}"></script>
+       <script>
+        $(document).ready(function () {
+            $('#district').change(function () {
+                var selectedDistrict = $(this).val();
+                if (selectedDistrict === 'Kannur') {
+                    // Populate the branch dropdown based on
+                    var branchDropdown = $('#branch');
+                    branchDropdown.empty();
+                    branchDropdown.append(new Option('Thalassery', 'thalassery'));
+                    branchDropdown.append(new Option('Panoor', 'Panoor'));
+                } else if (selectedDistrict === 'Wayanad') {
+                    // Populate the branch dropdown based on Thrissur
+                    var branchDropdown = $('#branch');
+                    branchDropdown.empty();
+                    branchDropdown.append(new Option('Manathavadi', 'Manathavadi'));
+                    branchDropdown.append(new Option('Uppala', 'uppala'));
+                }else if (selectedDistrict === 'Kasargod') {
+                    // Populate the branch dropdown based on Thrissur
+                    var branchDropdown = $('#branch');
+                    branchDropdown.empty();
+                    branchDropdown.append(new Option('Kasargod', 'kasargod'));
+                    branchDropdown.append(new Option('Uppala', 'uppala'));
+                }else if (selectedDistrict === 'Kozikkod') {
+                    // Populate the branch dropdown based on Thrissur
+                    var branchDropdown = $('#branch');
+                    branchDropdown.empty();
+                    branchDropdown.append(new Option('Kutyadi', 'kutyadi'));
+                    branchDropdown.append(new Option('Farook', 'farook'));
+                }else if (selectedDistrict === 'Malappuram') {
+                    // Populate the branch dropdown based on Malappuram
+                    var branchDropdown = $('#branch');
+                    branchDropdown.empty();
+                    branchDropdown.append(new Option('Ponnani', 'ponnani'));
+                    branchDropdown.append(new Option('Kuttipuram', 'kuttipuram'));
+                } else {
+                    // Reset the branch dropdown if no district is selected
+                    var branchDropdown = $('#branch');
+                    branchDropdown.empty();
+                    branchDropdown.append(new Option('Select a District first', ''));
+                }
+            });
+        });
+    </script>
+<!--  <script>-->
+<!--$(document).ready(function(){-->
+<!--  $('.dropdown-submenu a.test').on("click", function(e){-->
+<!--    $(this).next('ul').toggle();-->
+<!--    e.stopPropagation();-->
+<!--    e.preventDefault();-->
+<!--  });-->
+<!--});-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->

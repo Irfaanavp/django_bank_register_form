@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>zetbank</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <center> <a href="{% url 'form' %}"><button type="submit">Create Form</button></a></center>
+    </div>
+{% endblock %}
